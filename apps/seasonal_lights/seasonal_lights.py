@@ -100,8 +100,8 @@ APP_SCHEMA = vol.Schema({
         MONTH_DAY_SCHEMA,
         ConfDate,
     ),
-    vol.Required(CONF_TURN_ON_TIME): ConfTime,
-    vol.Required(CONF_TURN_OFF_TIME): ConfTime,
+    vol.Optional(CONF_TURN_ON_TIME, default="00:00:00"): ConfTime,
+    vol.Optional(CONF_TURN_OFF_TIME, default="23:59:59"): ConfTime,
     vol.Optional(CONF_ENTITIES, default=[]): ENTITIES_SCHEMA,
     vol.Optional(CONF_NAME): str,
     vol.Optional(CONF_LOG_LEVEL, default=LOG_DEBUG): vol.Any(LOG_INFO, LOG_DEBUG),
@@ -132,12 +132,12 @@ class SeasonalLights(hass.Hass):
         self.log(f"Start Date: {self._startdate}", level=self._level)
         self.log(f"End Date: {self._enddate}", level=self._level)
 
+        self._entities = [ AppEntity(e) for e in args.get(CONF_ENTITIES) ]
         self._starttime = args.get(CONF_TURN_ON_TIME).time()
         self._endtime = args.get(CONF_TURN_OFF_TIME).time()
-        self._entities = [ AppEntity(e) for e in args.get(CONF_ENTITIES) ]
 
         midnight = time(0,0,0)
-        self.log(f"Running daily at {midnight.strftime(TIME_FORMAT)}")
+        self.log(f"Running daily at {midnight.strftime(TIME_FORMAT)}", level=self._level)
         self.run_daily(self.run_season, midnight)
 
         if self._entities:
@@ -292,3 +292,4 @@ class AppEntity(object):
             self.attributes = conf.get(CONF_SERVICE_DATA, {})            
         elif isinstance(conf, str):
             self.entity_id = conf
+ 
