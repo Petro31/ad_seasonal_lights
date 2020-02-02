@@ -64,8 +64,8 @@ ATTRIBUTE_FORMAT = "%Y-%m-%dT%H:%M:%S"
 
 MONTH_WEEK_DAY_SCHEMA = {
     vol.Required(CONF_MONTH): vol.All(vol.Coerce(int), vol.Range(min=1, max=12)),
-    vol.Required(CONF_WEEK): vol.All(vol.Coerce(int), vol.Range(min=1, max=6)),
-    vol.Required(CONF_DAY): vol.All(vol.Coerce(int), vol.Range(min=1, max=7)),
+    vol.Required(CONF_WEEK): vol.All(vol.Coerce(int), vol.Range(min=0, max=5)),
+    vol.Required(CONF_DAY): vol.All(vol.Coerce(int), vol.Range(min=0, max=6)),
 }
 
 MONTH_DAY_SCHEMA = {
