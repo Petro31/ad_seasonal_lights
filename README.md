@@ -9,7 +9,9 @@ Creates a season binary_sensor.  The automation will turn on/off lights at the s
 
 ## Installation
 
-Download the `seasonal_lights` directory from inside the `apps` directory to your local `apps` directory, then add the configuration to enable the `hacs` module.
+1. Add the voluptuous depenedency to AppDaemon.
+
+2. Download the `seasonal_lights` directory from inside the `apps` directory to your local `apps` directory, then add the configuration to enable the `hacs` module.
 
 ## Example App configuration
 
