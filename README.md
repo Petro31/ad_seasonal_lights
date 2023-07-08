@@ -39,7 +39,7 @@ christmas_season:
   module: seasonal_lights
   class: SeasonalLights
   start_date:
-    # Thanksgiving, 4th day in the 5th week.
+    # Thanksgiving, 4th day in the 4th week.
     month: 11
     week: 4
     day: 3
